@@ -6,8 +6,9 @@ from django.db import transaction
 from app.models import Video, VideoScreenshot
 
 
-def convert_video_to_numpy(video):
+def convert_video_to_numpy(url, output_filename):
     """Perminently converts a video file on disk to a numpy array."""
+    cmd = "youtube-dl %s" % url
 
 
 def restore_video_file_from_numpy(video):
@@ -169,8 +170,13 @@ class Command(BaseCommand):
             help='A particular video to process.')
         p.add_argument('--frame-number', dest='frame_number', type=int,
             help='The frame number to consider.')
-        p.add_argument('--debug', action='store_true', dest='debug',
-            help='Whether or not to produce lots of debugging output.')
+        p.add_argument('--output_filename', dest='output_filename', type=str,
+            help='The filename to output to.')
+        p.add_argument('--url', action='store_true', dest='url',
+            help='The Youtube video URL to download.')
 
     def handle(self, *args, **opts):
         """High-level interface, which can handle CTRL-C input."""
+        url = opts['url']
+        output_filename = opts['output_filename']
+        convert_video_to_numpy(url, output_filename)

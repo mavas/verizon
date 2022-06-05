@@ -19,3 +19,4 @@ WORKDIR /home/verizon
 #COPY --chown=verizon vimrc .vimrc
 RUN git clone https://github.com/mavas/verizon
 RUN python3 -c "import cv2; print(cv2.__version__)"
+RUN python3 -c "import youtube_dl; print(youtube_dl.version.__version__)"
