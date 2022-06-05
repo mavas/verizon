@@ -11,8 +11,7 @@ RUN aptitude safe-upgrade -y
 RUN aptitude install -y build-essential python3 python3-pip cmake g++ python3-numpy-dev python3-dev python3-venv
 RUN aptitude install -y python3-arrow python3-cloudpickle ipython3 cython3
 RUN aptitude install -y ffmpeg libopencv-dev python3-opencv
-RUN aptitude install -y gradle gradle-plugin-protobuf
-RUN aptitude install -y youtube-dl
+RUN aptitude install -y youtube-dl git
 
 RUN useradd -ms /bin/bash verizon
 USER verizon
