@@ -19,6 +19,19 @@ def convert_video_to_numpy(url, output_filename):
     with open(filename, 'r') as fh:
         pass
 
+    v = get_video(url)
+    width, height = read_video_width_height_from_video(v)
+    _IMAGE_SHAPE = (width, height, 1)
+    _NAMES = ['melee', 'negative']
+    import tensorflow_datasets.public_api as tfds
+    features = tfds.features.FeaturesDict({
+        'image': tfds.features.Image(shape=_IMAGE_SHAPE),
+        'label': tfds.features.ClassLabel(names=_NAMES),
+    }),
+
+    with open(output_file, 'wb') as fh:
+        pickle.dump(fh, d)
+
 
 def restore_video_file_from_numpy(video):
     """Perminently transforms a numpy array into its original video file."""
