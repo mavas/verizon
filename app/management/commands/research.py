@@ -3,6 +3,14 @@ from django.core.management.base import BaseCommand, CommandError
 from app.models import Video, VideoScreenshot
 
 
+def convert_video_to_numpy(video):
+    """Perminently converts a video file on disk to a numpy array."""
+
+
+def restore_video_file_from_numpy(video):
+    """Perminently transforms a numpy array into its original video file."""
+
+
 def import_video_file(filename):
     video = Video.objects.create(filename=filename)
 

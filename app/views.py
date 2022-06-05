@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.management import call_command
 
 
 def home(request):
