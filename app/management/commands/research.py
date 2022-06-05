@@ -1,4 +1,5 @@
 import datetime
+import pickle
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
@@ -8,10 +9,15 @@ from app.models import Video, VideoScreenshot
 
 
 def convert_video_to_numpy(url, output_filename):
-    """Perminently converts a video file on disk to a numpy array."""
-    o = dict('outtmpl': 'file.movie')
+    """Perminently moves/converts a video file on disk to a numpy array, while
+    saving/preserving all metadata."""
+    filename = 'file.movie'
+    o = dict('outtmpl': filename)
     with youtube_dl.YoutubeDL(o) as ydl:
         ydl.download([url])
+
+    with open(filename, 'r') as fh:
+        pass
 
 
 def restore_video_file_from_numpy(video):
