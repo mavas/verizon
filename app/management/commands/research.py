@@ -2,13 +2,15 @@ import datetime
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+import youtube_dl
 
 from app.models import Video, VideoScreenshot
 
 
 def convert_video_to_numpy(url, output_filename):
     """Perminently converts a video file on disk to a numpy array."""
-    cmd = "youtube-dl %s" % url
+    with youtube_dl.YoutubeDL(dict()) as ydl:
+        ydl.download([url])
 
 
 def restore_video_file_from_numpy(video):
