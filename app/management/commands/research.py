@@ -9,7 +9,8 @@ from app.models import Video, VideoScreenshot
 
 def convert_video_to_numpy(url, output_filename):
     """Perminently converts a video file on disk to a numpy array."""
-    with youtube_dl.YoutubeDL(dict()) as ydl:
+    o = dict('outtmpl': 'file.movie')
+    with youtube_dl.YoutubeDL(o) as ydl:
         ydl.download([url])
 
 
@@ -65,7 +66,7 @@ def _database_video_import(file_path, dct, update=True):
 def import_video_file(file_path, root_path=None, verbose=False,
         frame_count=None, db=True, pretend=False, md5=True, bucket=None,
         vector_file=False, samples_file=None, dataset=None, frames=None,
-        rectangles=False, framecache=False, framecache=False):
+        rectangles=False, framecache=False):
     """
     Imports a video from a file.
 
@@ -174,7 +175,7 @@ class Command(BaseCommand):
             help='The frame number to consider.')
         p.add_argument('--output_filename', dest='output_filename', type=str,
             help='The filename to output to.')
-        p.add_argument('--url', action='store_true', dest='url',
+        p.add_argument('--url', dest='url', type=str,
             help='The Youtube video URL to download.')
 
     def handle(self, *args, **opts):
