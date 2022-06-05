@@ -15,6 +15,23 @@ log = logging.getLogger()
 serv_log = logging.getLogger('django.server')
 
 
+class RegionManager(models.Manager):
+    def get_by_natural_key(self, r, s):
+        return self.get(region=r, short_name=s)
+class Region(models.Model):
+    class Meta:
+        unique_together = (('region', 'short_name'),)
+    objects = RegionManager()
+    region = models.CharField(max_length=50, primary_key=True)
+    short_name = models.CharField(max_length=3)
+    def __unicode__(self):
+        if self.short_name:
+            return u'%s (%s)' % (self.region, self.short_name)
+        return u'%s' % self.region
+    def natural_key(s):
+        return (self.region, self.short_name)
+
+
 class VideoScreenshot(models.Model):
     """
     An image that was extracted from a video via mplayer's -vf screenshot

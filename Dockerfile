@@ -18,3 +18,4 @@ USER verizon
 WORKDIR /home/verizon
 #COPY --chown=verizon vimrc .vimrc
 RUN git clone https://github.com/mavas/verizon
+RUN python3 -c "import cv2; print(cv2.__version__)"
