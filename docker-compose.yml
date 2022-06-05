@@ -1,0 +1,31 @@
+version: '3'
+services:
+    db:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: password
+            POSTGRES_USER: verizon
+            #POSTGRES_DB: verizon_db
+        #command: ["postgres", "-c", "port=5433"]
+        ports:
+            - "5432:5432"
+        expose:
+            - "5432"
+        volumes:
+            - ./db_init/:/docker-entrypoint-initdb.d
+
+    web:
+        image: web
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/code
+        stdin_open: true
+        tty: true
+        # then do docker attach, after "docker-compose up -d"
+        ports:
+            - "8000:8000"
+        #command: python manage.py runserver 0.0.0.0:8000
+        depends_on:
+            - db
