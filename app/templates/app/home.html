@@ -1,4 +1,8 @@
 {% extends 'app/base.html' %}
 {% block body %}
 <a href="{% url 'admin:index' %}">Admin interface</a>
+<form action='.'>{% csrf_token %}
+{{ form.as_p }}
+<input value='Process Youtube video URL' type='submit' name='continue'>
+</form>
 {% endblock %}
