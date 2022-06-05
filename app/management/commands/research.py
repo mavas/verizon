@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
 
 from app.models import Video, VideoScreenshot
 
@@ -13,6 +14,10 @@ def restore_video_file_from_numpy(video):
 
 def import_video_file(filename):
     video = Video.objects.create(filename=filename)
+
+
+def create_video():
+    """Creates a video programmatically."""
 
 
 @transaction.atomic
