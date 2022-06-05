@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {# {% block head %} #}
+        <title>{{ head_title }}</title>
+        {# <title>{% block head_title %}{% endblock %}</title> #}
+        <link rel='stylesheet' href="{% static 'app/style.css' %}"></link>
+        {% block extra_head %}{% endblock %}
+    {# {% endblock head %} #}
+    </head>
+
+    <body>
+    <hr>
+
+    {% block body %}{% endblock %}
+    </body>
+</html>
