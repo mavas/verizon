@@ -1,12 +1,4 @@
-import pickle
-import os
-import random
-import json
-import pprint
-
 from django.core.management.base import BaseCommand, CommandError
-from django.core.management import call_command
-from django.core import serializers
 
 from app.models import Video, VideoScreenshot
 
