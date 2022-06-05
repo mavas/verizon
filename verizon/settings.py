@@ -67,12 +67,6 @@ WSGI_APPLICATION = 'verizon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 POSTGRES_NAME = os.environ.get('POSTGRES_NAME', 'verizon')
 POSTGRES_USER = os.environ.get('POSTGRES_USER', 'verizon')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'password')
