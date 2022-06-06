@@ -6,23 +6,21 @@ This repository contains work just to help convince www.Verizon.com to hire me f
 - Example computer vision pipeline demonstration [here](verizon/demo.md).
 - Verizon-specific writeup (the rest of this page..)
 
-## Verizon job-specific writeup
-
-### C++
+## C++
 
 It seems like this is heavily C++ oriented, and that's the first language I started with at the age of 15 in middle school.  Olimar's Escape is the (https://github.com/mavas/olimar-escape)[Olimar's escape] first significant project I worked on.  Of course it featured the obvious game loop that every game has, which updates the display, accepts input, progresses the story further, updates player attributes, etc.  It's worth noting that Python wasn't even around at that time, and so I really only knew C++ and did everything with it.  I still use it, so there's nothing to worry about regarding my C++ understanding.
 
-### TensorFlow
+## TensorFlow
 
 The certification is significant.  It proves that I'm familiar and handy with TensorFlow _itself_, and is an officially-backed degree, you could say.
 
 Aside from that, you should have a custom project that you use tensorflow with.
 
-### OpenCV
+## OpenCV
 
 The Verizon-provided coding challenge is OpenCV-specific (no TF).  Aside from that, I've read the book from www.PyImageSearch.com, compiled the software specifically for Python language bindings, am familiar with its haar cascacedes work, and the cvkit library.
 
-### Relavent knowledge and understanding
+## Relavent knowledge and understanding
 
 - [tensorflow-without-a-phd](https://github.com/GoogleCloudPlatform/tensorflow-without-a-phd).  This repository is officially supported by TensorFlow, and is highly valuable towards understanding and practicing convolutional neural networks, dropouts, time series analysis, and the like.  So this repository is a solid point why you folks should consider my candidacy.
 
