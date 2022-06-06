@@ -1,4 +1,1 @@
-There are only 2 pieces of work:
-
-- The Verizon-provided OpenCV-based coding challenge
-- A Django and Docker computer vision pipeline demonstration
+There shouldn't be any other files in this directory aside from this one.  The only 2 directories that should be here should be called 'challenge' and 'verizon'.
