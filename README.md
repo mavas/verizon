@@ -6,7 +6,7 @@ This repository contains work just to help convince www.Verizon.com to hire me f
 - Super Smash Bros. computer vision pipeline demonstration [here](verizon/demo.md).
 - Verizon-specific writeup (the rest of this page..)
 
-## Verizon-specific job writeup
+## Verizon job-specific writeup
 
 ### C++
 
