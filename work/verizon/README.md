@@ -20,10 +20,13 @@ https://www.tensorflow.org/datasets/features
 
 - Multiclassification character moves
 
-## Docker demonstration
+## Docker-based demonstration
+
+The primary user interface is the web browser at http://localhost:8000/.  Using it, you can import videos into the database, perform object detection on videos and images, etc..
+
+There are 4 containers: a PostgreSQL database, a Django web server, a TensorBoard server, and an Ubuntu operating system.
 
 ```
 git clone https://github.com/mavas/verizon
-cd verizon
-docker build -t verizon .
+docker build -f verizon/work/verizon/Dockerfile -t verizon .
 ```
