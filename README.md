@@ -20,7 +20,9 @@ Aside from that, you should have a custom project that you use tensorflow with.
 
 ### OpenCV
 
-### Actual deep learning knowledge and computer vision
+The Verizon-provided coding challenge is OpenCV-specific (no TF).  Aside from that, I've read the book from www.PyImageSearch.com, compiled the software specifically for Python language bindings, am familiar with its haar cascacedes work, and the cvkit library.
+
+### Relavent knowledge and understanding
 
 - [tensorflow-without-a-phd](https://github.com/GoogleCloudPlatform/tensorflow-without-a-phd).  This repository is officially supported by TensorFlow, and is highly valuable towards understanding and practicing convolutional neural networks, dropouts, time series analysis, and the like.  So this repository is a solid point why you folks should consider my candidacy.
 
