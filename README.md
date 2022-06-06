@@ -31,10 +31,3 @@ The other big point regarding my candidacy is my application of computer vision 
 These 3 things taken together, combined with the classic chicken-and-the-egg problem, means you folks should hire me.
 
 - On the current screen, throughout the entire video
-
-### Why the models were created and the way that they are defined
-
-In TF you make wise use of their `features` for whatever way you want to target your model.
-
-https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes
-https://www.tensorflow.org/datasets/features
