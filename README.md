@@ -10,15 +10,15 @@ This repository contains work just to help convince www.Verizon.com to hire me f
 
 It seems like this is heavily C++ oriented, and that's the first language I started with at the age of 15 in middle school.  Olimar's Escape is the (https://github.com/mavas/olimar-escape)[Olimar's escape] first significant project I worked on.  Of course it featured the obvious game loop that every game has, which updates the display, accepts input, progresses the story further, updates player attributes, etc.  It's worth noting that Python wasn't even around at that time, and so I really only knew C++ and did everything with it.  I still use it, so there's nothing to worry about regarding my C++ understanding.
 
+## OpenCV
+
+The Verizon-provided coding challenge is OpenCV-specific (no TF).  Aside from that, I've read the book from www.PyImageSearch.com, compiled the software specifically for Python language bindings, am familiar with its haar cascacedes work, and the cvkit library.
+
 ## TensorFlow
 
 The certification is significant.  It proves that I'm familiar and handy with TensorFlow _itself_, and is an officially-backed degree, you could say.
 
-Aside from that, you should have a custom project that you use tensorflow with.
-
-## OpenCV
-
-The Verizon-provided coding challenge is OpenCV-specific (no TF).  Aside from that, I've read the book from www.PyImageSearch.com, compiled the software specifically for Python language bindings, am familiar with its haar cascacedes work, and the cvkit library.
+Aside from the official certification though, you should have a custom project that you use tensorflow with, and this is (one of) mine.
 
 ## Relavent knowledge and understanding
 
