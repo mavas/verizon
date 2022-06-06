@@ -1,18 +1,69 @@
 import datetime
+import logging
+import os
+from contextlib import contextmanager
 import pickle
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 import youtube_dl
+import cv2
+import numpy as np
 
 from app.models import Video, VideoScreenshot
 
+log = logging.getLogger()
 
-def convert_video_to_numpy(url, output_filename):
+@contextmanager
+def opencv_videocapture(f, vc=None):
+    if isinstance(f, Video):
+        f = f.get_local_file_path()
+    if not os.path.isfile(f):
+        raise Exception("%s is not a file." % f)
+    log.debug("OpenCV VideoCapture opening %s.." % f)
+    if not vc:
+        vc = cv2.VideoCapture(f)
+    if not vc.isOpened():
+        m = "Could not open %s with OpenCV video capture." % f
+        log.error(m)
+        raise Exception(m)
+    try:
+        yield vc
+    finally:
+        log.debug("OpenCV VideoCapture closing %s.." % f)
+        vc.release()
+
+
+def get_video_width_height(v):
+    #cv2.
+    pass
+
+#def convert_video_to_numpy(url, output_filename):
+def convert_video_to_numpy(v):
     """Perminently moves/converts a video file on disk to a numpy array, while
     saving/preserving all metadata."""
+    import ipdb;ipdb.set_trace()
+    if isinstance(v, Video):
+        w, h = v.width, v.height
+        end_frame = v.end_frame
+        v.end_frame = count_video_frames(v.get_filename())
+        w = vc.get(cv2.CAP_PROP_FRAME_WIDTH)
+        h = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    with opencv_videocapture(v) as vc:
+        o = np.array(shape=(w, h, end_frame))
+        c = 0
+        rval = True
+        while rval:
+            rval, img = vc.read()
+            if rval:
+                o[c] = img
+                c += 1
+            else:
+                raise Exception
+    return o
     filename = 'file.movie'
-    o = dict('outtmpl': filename)
+    o = dict()
+    o['outtmpl'] = filename
     with youtube_dl.YoutubeDL(o) as ydl:
         ydl.download([url])
 
@@ -194,11 +245,14 @@ class Command(BaseCommand):
             help='The frame number to consider.')
         p.add_argument('--output_filename', dest='output_filename', type=str,
             help='The filename to output to.')
+        p.add_argument('--filename', dest='filename', type=str,
+            help='The filename to consider.')
         p.add_argument('--url', dest='url', type=str,
             help='The Youtube video URL to download.')
 
     def handle(self, *args, **opts):
         """High-level interface, which can handle CTRL-C input."""
-        url = opts['url']
-        output_filename = opts['output_filename']
-        convert_video_to_numpy(url, output_filename)
+        #url = opts['url']
+        #output_filename = opts['output_filename']
+        filename = opts['filename']
+        convert_video_to_numpy(filename)
