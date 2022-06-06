@@ -22,12 +22,6 @@ Aside from that, you should have a custom project that you use tensorflow with.
 
 ### Actual deep learning knowledge and computer vision
 
-tensorflow-without-a-phd.  This repository is officially supported by TensorFlow, and is highly valuable towards understanding and practicing convolutional neural networks, dropouts, time series analysis, and the like.  So this repository is a solid point why you folks should consider my candidacy.
+- [tensorflow-without-a-phd](https://github.com/GoogleCloudPlatform/tensorflow-without-a-phd).  This repository is officially supported by TensorFlow, and is highly valuable towards understanding and practicing convolutional neural networks, dropouts, time series analysis, and the like.  So this repository is a solid point why you folks should consider my candidacy.
 
-The official certification covers a variety of subjects, but I can tell you that they are broadly categorized into 3: CNNs, natural language processing, and time series analysis.  This job of course has nothing to do with natural language, but the other 2 subjects are important for computer vision and deep learning, and so that's good for my candidacy for this role.  This is another big point regarding my candidacy.
-
-The other big point regarding my candidacy is my application of computer vision to my particular problem domain (video and image).
-
-These 3 things taken together, combined with the classic chicken-and-the-egg problem, means you folks should hire me.
-
-- On the current screen, throughout the entire video
+- [The official certification](https//www.tensorflow.org/certificate) covers a variety of subjects, but I can tell you that they are broadly categorized into 3: CNNs, natural language processing, and time series analysis.  This job of course has nothing to do with natural language, but the other 2 subjects are important for computer vision and deep learning, and so that's good for my candidacy for this role.  This is another big point regarding my candidacy.
