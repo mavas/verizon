@@ -11,14 +11,15 @@ In TF you make wise use of their `features` for which ever way it is that you wa
 https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes
 https://www.tensorflow.org/datasets/features
 
-- Binary classification, whether or not gameplay footage is present (menu,
-  stages, etc.)
+- Binary classification, whether or not gameplay footage is present (menu, stages, etc.)
 
-- Multiclassification stages: 26 stages
+- Localization.  This is just like before, except now we can place a bounding box around where the model thinks gameplay footage is present.
 
-- Multiclassification stages and characters
+- Multiclassification stages: 26 stages.  This is just like before, except now the model can distinguish between which of the 26 stages is present (or if it's a menu screen, etc.)
 
-- Multiclassification character moves
+- Multiclassification stages and characters.  This is just like before, except now the model can also detect which characters are on the screen, in addition to which stage the game is played on.
+
+- Multiclassification character moves.  This is just like before, except now the model can detect which moves the characters are performing.
 
 ## Docker-based demonstration
 
