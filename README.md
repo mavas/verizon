@@ -3,7 +3,7 @@
 This repository contains work just to help convince www.Verizon.com to hire me for a contract job they have open.
 
 - Verizon-created computer vision programming challenge [here](challenge/challenge.md).
-- Super Smash Bros. computer vision pipeline demonstration [here](verizon/demo.md).
+- Example computer vision pipeline demonstration [here](verizon/demo.md).
 - Verizon-specific writeup (the rest of this page..)
 
 ## Verizon job-specific writeup
@@ -26,7 +26,7 @@ tensorflow-without-a-phd.  This repository is officially supported by TensorFlow
 
 The official certification covers a variety of subjects, but I can tell you that they are broadly categorized into 3: CNNs, natural language processing, and time series analysis.  This job of course has nothing to do with natural language, but the other 2 subjects are important for computer vision and deep learning, and so that's good for my candidacy for this role.  This is another big point regarding my candidacy.
 
-The other big point regarding my candidacy is my application of computer vision to my particular problem domain: Super Smash Bros.
+The other big point regarding my candidacy is my application of computer vision to my particular problem domain (video and image).
 
 These 3 things taken together, combined with the classic chicken-and-the-egg problem, means you folks should hire me.
 
