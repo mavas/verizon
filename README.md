@@ -2,7 +2,7 @@
 
 This repository contains work just to help convince www.Verizon.com to hire me for a contract job they have open.
 
-- Verizon-created computer vision programming challenge [here](work/challenge/challenge.md).
+- Verizon-created computer vision programming challenge [here](work/challenge/README.md).
 - Example computer vision pipeline demonstration [here](work/verizon/demo.md).
 - Verizon-specific writeup (the rest of this page..)
 
