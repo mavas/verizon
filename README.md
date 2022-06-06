@@ -14,7 +14,7 @@ It seems like this is heavily C++ oriented, and that's the first language I star
 
 ### TensorFlow
 
-The certification is important.  It proves that I'm familiar and handy with TensorFlow _itself_, and is an officially-backed degree, you could say.
+The certification is significant.  It proves that I'm familiar and handy with TensorFlow _itself_, and is an officially-backed degree, you could say.
 
 Aside from that, you should have a custom project that you use tensorflow with.
 
