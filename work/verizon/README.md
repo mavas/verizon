@@ -6,12 +6,6 @@ The directory parent to this one was initially started by the command `django-ad
 
 ## Models
 
-In TF you make wise use of their `features` for which ever way it is that you want to target your model.
-
-- https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes
-
-- https://www.tensorflow.org/datasets/features
-
 Here are the custom models created with his repository:
 
 - Binary classification, whether or not gameplay footage is present (menu, stages, etc.)

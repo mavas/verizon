@@ -1,11 +1,20 @@
+"""
+In TF you make wise use of their `features` for which ever way it is that you want to target your model.
+
+- https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes
+
+- https://www.tensorflow.org/datasets/features
+"""
+
+
 import datetime
 
 import tensorflow as tf
 
 
 def load_data():
-  (x_train, y_train), (x_test, y_test) = load_data()
-  return (x_train, y_train), (x_test, y_test)
+    (train_images, train_labels), (test_images, test_images) = load_data()
+    return (train_images, train_labels), (test_images, test_images)
 
 
 def create_model():
