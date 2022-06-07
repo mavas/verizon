@@ -57,6 +57,10 @@ def convert_video_to_numpy(v):
         w = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
         h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
         end_frame = count_video_frames(v)
+        #if not journey_present(v):
+        #    create_journey(v)
+        #else:
+        #    journey = load_journey(v)
         o = np.zeros(shape=(end_frame, h, w, 3), dtype=np.int32)
         c = 0
         rval = True
@@ -68,14 +72,14 @@ def convert_video_to_numpy(v):
             else:
                 raise Exception
     return o
+
+
+def download_youtube_video():
     filename = 'file.movie'
     o = dict()
     o['outtmpl'] = filename
     with youtube_dl.YoutubeDL(o) as ydl:
         ydl.download([url])
-
-    with open(filename, 'r') as fh:
-        pass
 
     v = get_video(url)
     width, height = read_video_width_height_from_video(v)
