@@ -116,8 +116,7 @@ def convert_video_to_numpy(v):
         end_frame = v.end_frame
         v.end_frame = count_video_frames(v.get_filename())
     with opencv_videocapture(v) as vc:
-        w = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
-        h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        width, height = read_video_width_height_from_video(v)
         end_frame = count_video_frames(v)
         o = np.zeros(shape=(end_frame, h, w, 3), dtype=np.int32)
         c = 0
@@ -147,10 +146,7 @@ def download_youtube_video():
     features = tfds.features.FeaturesDict({
         'image': tfds.features.Image(shape=_IMAGE_SHAPE),
         'label': tfds.features.ClassLabel(names=_NAMES),
-    }),
-
-    with open(output_file, 'wb') as fh:
-        pickle.dump(fh, d)
+    })
 
 
 def restore_video_file_from_numpy(video):
@@ -199,18 +195,12 @@ def _database_video_import(file_path, dct, update=True):
         db_created = False
     return v, db_created
 
-def read_video_width_height_from_filename(filename):
-    with opencv_videocapture(filename) as vc:
-        w = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
-        h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        return w, h
-
 
 def video_file_metadata(file_path, root_path):
     """Computes meta data about a video file, as a dictionary."""
     dct, f, fn = _path_related_metadata(file_path, root_path)
     dct = _other_metadata(dct, f, fn)
-    dct['width'], dct['height'] = read_video_width_height_from_filename(f)
+    dct['width'], dct['height'] = read_video_width_height_from_video(f)
     dct['start_frame'] = 0
     dct['end_frame'] = count_video_frames(f)
     dct['end_frame_date'] = datetime.datetime.now()
