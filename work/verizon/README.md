@@ -1,4 +1,4 @@
-# A web administration interface for Super Smash Bros. Melee video and image data curation
+# A web administration interface for video and image data curation
 
 This is all for machine learning purposes.  The most important thing is a Django management command that outputs `tfrecord` files.
 
