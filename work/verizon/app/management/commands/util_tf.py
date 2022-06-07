@@ -1,5 +1,6 @@
 """
-In TF you make wise use of their `features` for which ever way it is that you want to target your model.
+In TF you make wise use of their `features` for which ever way it is that you
+want to target your model.
 
 - https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes
 

@@ -4,6 +4,12 @@ This is all for machine learning purposes.  The most important thing is a Django
 
 The directory parent to this one was initially started by the command `django-admin startproject verizon`, with Django version 4.0.5.
 
+## Example commands
+
+```
+python manage.py label --video QJHcWIXymHA
+```
+
 ## Models
 
 Here are the custom models created with his repository:
