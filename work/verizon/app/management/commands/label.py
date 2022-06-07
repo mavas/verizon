@@ -7,7 +7,7 @@ import pickle
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.utils.timezone import utc
-from django.core.cache import cache
+from django.core.cache import caches
 import numpy as np
 import youtube_dl
 import cv2
@@ -15,8 +15,9 @@ import cv2
 from app.models import Video, VideoScreenshot
 
 
-framecache = cache
 log = logging.getLogger('django.server')
+cache = caches['default']
+framecache = caches['framecache']
 
 
 @contextmanager
@@ -201,28 +202,8 @@ def read_video_width_height_from_filename(filename):
         h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
         return w, h
 
-@transaction.atomic
-def import_video_file(file_path, root_path=None, verbose=False,
-        frame_count=None, db=True, pretend=False, md5=True, bucket=None,
-        vector_file=False, samples_file=None, dataset=None, frames=None,
-        rectangles=False, framecache=False):
-    """
-    Imports a video from a file.
-
-    This function makes the database aware of a video file on disk, uploads the
-    video to the cloud, uploads the video images, adds the images to vector
-    file, etc.
-
-    TODO: This function should be reliably predictable when it's importing a
-    video it already knows about.
-
-    :param file_path: The file path to the video.
-    :param root_path: Consider the paths in file_path, if any, to 
-    :param framecache: Whether or not to add the video frames to the local file
-        system frame cache.
-    :param framecache: Whether or not to add the video frames to the cloud
-        video frame cache.
-    """
+def video_file_metadata(file_path, root_path):
+    """Computes meta data about a video file, as a dictionary."""
     dct = dict()
     # Root paths.
     f = os.path.abspath(file_path)
@@ -274,8 +255,32 @@ def import_video_file(file_path, root_path=None, verbose=False,
     dct['end_frame_date'] = datetime.datetime.now()
     #dct['md5'], _ = MD5Hash.objects.get_or_create(
     #    content=compute_md5_filename(file_path))
+    return dct
+
+@transaction.atomic
+def import_video_file(file_path, root_path=None, verbose=False,
+        frame_count=None, db=True, pretend=False, md5=True, bucket=None,
+        vector_file=False, samples_file=None, dataset=None, frames=None,
+        rectangles=False, framecache=False):
+    """
+    Imports a video from a file.
+
+    This function makes the database aware of a video file on disk, uploads the
+    video to the cloud, uploads the video images, adds the images to vector
+    file, etc.
+
+    TODO: This function should be reliably predictable when it's importing a
+    video it already knows about.
+
+    :param file_path: The file path to the video.
+    :param root_path: Consider the paths in file_path, if any, to 
+    :param framecache: Whether or not to add the video frames to the local file
+        system frame cache.
+    :param framecache: Whether or not to add the video frames to the cloud
+        video frame cache.
+    """
+    dct = video_file_metadata(file_path, root_path)
     v, db_created = _database_video_import(file_path, dct)
-    # Done.
     return v, db_created
 
 
@@ -321,6 +326,7 @@ class Command(BaseCommand):
         """High-level interface, which can handle CTRL-C input."""
         #url = opts['url']
         #output_filename = opts['output_filename']
-        filename = opts['filename']
-        v = import_video_file(filename)
-        convert_video_to_numpy(v)
+        if opts['filename']:
+            filename = opts['filename']
+            v = import_video_file(filename)
+            convert_video_to_numpy(v)
