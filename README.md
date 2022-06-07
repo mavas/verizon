@@ -8,7 +8,7 @@ This repository contains work just to help convince www.Verizon.com to hire me f
 
 ## C++
 
-It seems like this is heavily C++ oriented, and that's the first language I started with at the age of 15 in middle school.  Olimar's Escape is the (https://github.com/mavas/olimar-escape)[Olimar's escape] first significant project I worked on.  Of course it featured the obvious game loop that every game has, which updates the display, accepts input, progresses the story further, updates player attributes, etc.  It's worth noting that Python wasn't even around at that time, and so I really only knew C++ and did everything with it.  I still use it, so there's nothing to worry about regarding my C++ understanding.
+It seems like this is heavily C++ oriented, and that's the first language I started with at the age of 15 in middle school.  [Olimar's Escape](https://github.com/mavas/olimar-escape) is the first significant project I worked on.  Of course it featured the obvious game loop that every game has, which updates the display, accepts input, progresses the story further, updates player attributes, etc.  It's worth noting that Python wasn't even around at that time, and so I really only knew C++ and did everything with it.  I still use it, so there's nothing to worry about regarding my C++ understanding.
 
 ## OpenCV
 
