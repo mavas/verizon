@@ -15,6 +15,11 @@ import cv2
 from app.models import Video, VideoScreenshot
 
 
+_HELP = """
+This 'label' Django management command operates on video files, and is used for
+machine learning (data curation).
+"""
+
 log = logging.getLogger('django.server')
 cache = caches['default']
 framecache = caches['framecache']
@@ -169,7 +174,6 @@ def _database_video_import(file_path, dct, update=True):
         db_created = False
         return v, db_created
     known = False
-    #if not Video.objects.filter(**dct).exists():
     qs = Video.objects.filter(filename__iexact=dct['filename'])
     qs = qs.filter(file_extension__iexact=dct['file_extension'])
     if not qs.exists():
@@ -177,7 +181,6 @@ def _database_video_import(file_path, dct, update=True):
         log.info('Created video %s.' % v)
         db_created = True
     else:
-        #v = Video.objects.get(**dct)
         qs = Video.objects.filter(filename__iexact=dct['filename'])
         qs = qs.filter(file_extension__iexact=dct['file_extension'])
         if len(qs) == 1:
@@ -233,9 +236,11 @@ def video_file_metadata(file_path, root_path):
     if os.path.split(os.path.split(file_path)[1])[0] != '':
         dct['file_path'] = os.path.split(os.path.split(file_path)[1])[0]
     if 'file_path' in dct:
-        fn = os.path.abspath(os.path.join(dct['root_path'], dct['root_path_name'], dct['file_path'], dct['filename'] + '.' + dct['file_extension']))
+        fn = os.path.join(dct['root_path'], dct['root_path_name'], dct['file_path'], dct['filename'] + '.' + dct['file_extension'])
+        fn = os.path.abspath(fn)
     else:
-        fn = os.path.abspath(os.path.join(dct['root_path'], dct['root_path_name'], dct['filename'] + '.' + dct['file_extension']))
+        fn = os.path.join(dct['root_path'], dct['root_path_name'], dct['filename'] + '.' + dct['file_extension'])
+        fn = os.path.abspath(fn)
     # Other stuff.
     st = os.stat(fn); del fn
     dct['atime'] =\
@@ -296,7 +301,7 @@ def import_video_screenshot(filename, screenshot):
 
 
 class Command(BaseCommand):
-    help = "Utility"
+    help = _HELP
 
     def add_arguments(s, p):
         p.add_argument('--label', action='store',
