@@ -6,6 +6,8 @@ import pickle
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+from django.utils.timezone import utc
+from django.core.cache import cache
 import numpy as np
 import youtube_dl
 import cv2
@@ -13,6 +15,7 @@ import cv2
 from app.models import Video, VideoScreenshot
 
 
+framecache = cache
 log = logging.getLogger('django.server')
 
 
@@ -35,6 +38,49 @@ def opencv_videocapture(f, vc=None):
         log.debug("OpenCV VideoCapture closing %s.." % f)
         vc.release()
 
+def get_random_video_frame(v):
+    return random.sample(range(0, v.end_frame), 1)[0]
+def _get_raw_video_frames_range(minimum, maximum):
+    result_list = []
+    for fn in range(minimum, maximum):
+        key = '%d_%d' % (v.id, fn)
+        result = framecache.get(key)
+        if result is not None:
+            result_list.append(result)
+    return result_list
+def get_raw_video_frames(v, frames, rectangle=None, vc=None, use_cache=True):
+    """
+    Returns the raw data of a video frame.
+
+    This is the best function to use in regards to retrieving a video's frame
+    data, as it incorporates caching, and is designed to be used universally
+    wherever a video frame is needed.
+    """
+    # A single integer.
+    if isinstance(frames, int):
+        frame = frames
+        if use_cache:
+            # ..
+            key = '%d_%d' % (v.id, frame)
+            result = framecache.get(key)
+            if result is not None:
+                return result
+
+        #if use_cache:
+        #    if not os.path.exists(os.path.join(settings.DEVELOPMENT_MELEE_PATH, 
+        rval, value = read_video_frame_number(v, frame, vc=vc)
+        if rval and use_cache:
+            framecache.set(key, value)
+        return value
+    # A range of integers, expressed as a 2-tuple.
+    elif isinstance(frames, tuple) and len(frames) == 2:
+        minimum, maximum = frames[0], frames[1]
+        return _get_raw_video_frames_range(minimum, maximum)
+    # ...
+    elif is_number_range(frames):
+        minimum, maximum = parse_number_range(frames)
+        return _get_raw_video_frames_range(minimum, maximum)
+
 def count_video_frames(f, add_frame_numbers=False):
     """Counts the number of video frames found in a file."""
     f = os.path.abspath(f)
@@ -45,7 +91,17 @@ def count_video_frames(f, add_frame_numbers=False):
     else:
         raise Exception("Not a file.")
 
-#def convert_video_to_numpy(url, output_filename):
+def convert_video_to_numpy_journey(v, j):
+    frames_already_present = get_journey_frames(v)
+    disjoint_frames = compute_disjoint_frames(v)
+    with opencv_videocapture(v) as vc:
+        pass
+
+    if not journey_present(v):
+        create_journey(v)
+    else:
+        journey = load_journey(v)
+
 def convert_video_to_numpy(v):
     """Perminently moves/converts a video file on disk to a numpy array, while
     saving/preserving all metadata."""
@@ -57,10 +113,6 @@ def convert_video_to_numpy(v):
         w = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
         h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
         end_frame = count_video_frames(v)
-        #if not journey_present(v):
-        #    create_journey(v)
-        #else:
-        #    journey = load_journey(v)
         o = np.zeros(shape=(end_frame, h, w, 3), dtype=np.int32)
         c = 0
         rval = True
@@ -143,6 +195,12 @@ def _database_video_import(file_path, dct, update=True):
         db_created = False
     return v, db_created
 
+def read_video_width_height_from_filename(filename):
+    with opencv_videocapture(filename) as vc:
+        w = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
+        h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        return w, h
+
 @transaction.atomic
 def import_video_file(file_path, root_path=None, verbose=False,
         frame_count=None, db=True, pretend=False, md5=True, bucket=None,
@@ -216,8 +274,6 @@ def import_video_file(file_path, root_path=None, verbose=False,
     dct['end_frame_date'] = datetime.datetime.now()
     #dct['md5'], _ = MD5Hash.objects.get_or_create(
     #    content=compute_md5_filename(file_path))
-    dct['md5'], _ = MD5Hash.objects.get_or_create(
-        content=compute_md5_filename(f))
     v, db_created = _database_video_import(file_path, dct)
     # Done.
     return v, db_created
@@ -266,4 +322,5 @@ class Command(BaseCommand):
         #url = opts['url']
         #output_filename = opts['output_filename']
         filename = opts['filename']
-        convert_video_to_numpy(filename)
+        v = import_video_file(filename)
+        convert_video_to_numpy(v)
