@@ -198,8 +198,11 @@ def _database_video_import(file_path, dct, update=True):
 
 def video_file_metadata(file_path, root_path):
     """Computes meta data about a video file, as a dictionary."""
+    # file-based
     dct, f, fn = _path_related_metadata(file_path, root_path)
+    # other miscellaneous
     dct = _other_metadata(dct, f, fn)
+    # OpenCV-related
     dct['width'], dct['height'] = read_video_width_height_from_video(f)
     dct['start_frame'] = 0
     dct['end_frame'] = count_video_frames(f)
@@ -270,12 +273,15 @@ class Command(BaseCommand):
             help='The filename to consider.')
         p.add_argument('--url', dest='url', type=str,
             help='The Youtube video URL to download.')
+        p.add_argument('--youtube-id', dest='youtube_id', type=str,
+            help='The Youtube video URL ID to consider.')
 
     def handle(self, *args, **opts):
-        """High-level interface, which can handle CTRL-C input."""
-        #url = opts['url']
-        #output_filename = opts['output_filename']
-        if opts['filename']:
+
+        if opts['youtube_id']:
+            v = Video.objects.get(youtube_id=opts['youtube_id'])
+
+        elif opts['filename']:
             filename = opts['filename']
             v = import_video_file(filename)
             convert_video_to_numpy(v)

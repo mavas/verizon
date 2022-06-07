@@ -368,6 +368,7 @@ class Video(models.Model):
 
     # Fields.
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    youtube_id = models.CharField(max_length=30, null=True, blank=True)
     title = models.CharField(max_length=200,blank=True)
     short_name = models.CharField(max_length=50,blank=True)
     filename = models.CharField(max_length=500, blank=True)

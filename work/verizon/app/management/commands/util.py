@@ -1,12 +1,23 @@
 import datetime
+import re
 import os
 
 from django.utils.timezone import utc
 
 
+def _youtube_id_metadata(filename):
+    """Extracts the Youtube video ID from the filename."""
+    m = re.match(r'^(.+)-(.{11}).mp4$', filename)
+    if m:
+        youtube_id = m.group(2)
+        return youtube_id
+    return ''
+
 def _path_related_metadata(file_path, root_path):
+    """Computes file-related meta data."""
     dct = dict()
     f = os.path.abspath(file_path)
+    dct['youtube_id'] = _youtube_id_metadata(f)
     if root_path:
         if not root_path.startswith('/') and file_path.startswith(root_path):
             # 'smash'
