@@ -108,6 +108,10 @@ def convert_video_to_numpy_journey(v, j):
     else:
         journey = load_journey(v)
 
+    end_frame = v.end_frame
+    with opencv_videocapture(v) as vc:
+        vc.set(cv2.cv.CV_CAP_PROP_POS_FRAMES, c)
+
 def convert_video_to_numpy(v):
     """Perminently moves/converts a video file on disk to a numpy array, while
     saving/preserving all metadata."""

@@ -18,7 +18,7 @@ The Verizon-provided coding challenge is OpenCV-specific (no TF).  Aside from th
 
 The certification is significant.  It proves that I'm familiar and handy with TensorFlow _itself_, and is an officially-backed degree, you could say.
 
-Aside from the official certification though, you should have a custom project that you use tensorflow with, and this is (one of) mine.
+Aside from the official certification though, you should have a custom project that you use tensorflow with, and this is (one of) mine.  They involve 1.) convolutional neural networks for image classification, 2.) incorporation of Tensorboard statistics and visualization, 3.) an Apache Beam pipeline that incorporates and _combines_ both OpenCV and TF model results (for increased performance/accuracy), and 4.) custom-made and published datasets.
 
 ## Relavent knowledge and understanding
 
