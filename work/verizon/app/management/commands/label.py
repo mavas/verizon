@@ -208,7 +208,6 @@ def read_video_width_height_from_filename(filename):
 
 def video_file_metadata(file_path, root_path):
     """Computes meta data about a video file, as a dictionary."""
-    import ipdb;ipdb.set_trace()
     dct, f, fn = _path_related_metadata(file_path, root_path)
     dct = _other_metadata(dct, f, fn)
     dct['width'], dct['height'] = read_video_width_height_from_filename(f)
