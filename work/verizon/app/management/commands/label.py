@@ -6,13 +6,15 @@ import pickle
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+import numpy as np
 import youtube_dl
 import cv2
-import numpy as np
 
 from app.models import Video, VideoScreenshot
 
-log = logging.getLogger()
+
+log = logging.getLogger('django.server')
+
 
 @contextmanager
 def opencv_videocapture(f, vc=None):
@@ -33,24 +35,29 @@ def opencv_videocapture(f, vc=None):
         log.debug("OpenCV VideoCapture closing %s.." % f)
         vc.release()
 
-
-def get_video_width_height(v):
-    #cv2.
-    pass
+def count_video_frames(f, add_frame_numbers=False):
+    """Counts the number of video frames found in a file."""
+    f = os.path.abspath(f)
+    if os.path.isfile(f):
+        with opencv_videocapture(f) as vc:
+            count = vc.get(cv2.CAP_PROP_FRAME_COUNT)
+            return int(count)
+    else:
+        raise Exception("Not a file.")
 
 #def convert_video_to_numpy(url, output_filename):
 def convert_video_to_numpy(v):
     """Perminently moves/converts a video file on disk to a numpy array, while
     saving/preserving all metadata."""
-    import ipdb;ipdb.set_trace()
     if isinstance(v, Video):
         w, h = v.width, v.height
         end_frame = v.end_frame
         v.end_frame = count_video_frames(v.get_filename())
-        w = vc.get(cv2.CAP_PROP_FRAME_WIDTH)
-        h = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
     with opencv_videocapture(v) as vc:
-        o = np.array(shape=(w, h, end_frame))
+        w = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
+        h = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        end_frame = count_video_frames(v)
+        o = np.zeros(shape=(end_frame, h, w, 3), dtype=np.int32)
         c = 0
         rval = True
         while rval:
