@@ -8,7 +8,6 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.core.cache import caches
 import numpy as np
-import youtube_dl
 import cv2
 
 from app.models import Video, VideoScreenshot
@@ -135,24 +134,6 @@ def convert_video_to_numpy(v):
     return o
 
 
-def download_youtube_video():
-    filename = 'file.movie'
-    o = dict()
-    o['outtmpl'] = filename
-    with youtube_dl.YoutubeDL(o) as ydl:
-        ydl.download([url])
-
-    v = get_video(url)
-    width, height = read_video_width_height_from_video(v)
-    _IMAGE_SHAPE = (width, height, 1)
-    _NAMES = ['melee', 'negative']
-    import tensorflow_datasets.public_api as tfds
-    features = tfds.features.FeaturesDict({
-        'image': tfds.features.Image(shape=_IMAGE_SHAPE),
-        'label': tfds.features.ClassLabel(names=_NAMES),
-    })
-
-
 def restore_video_file_from_numpy(video):
     """Perminently transforms a numpy array into its original video file."""
 
@@ -276,14 +257,14 @@ class Command(BaseCommand):
         p.add_argument('--filename', dest='filename', type=str,
             help='The filename to consider.')
         p.add_argument('--url', dest='url', type=str,
-            help='The Youtube video URL to download.')
-        p.add_argument('--youtube-id', dest='youtube_id', type=str,
-            help='The Youtube video URL ID to consider.')
+            help='The video URL to download.')
+        p.add_argument('--video-id', dest='video_id', type=str,
+            help='The video URL ID to consider.')
 
     def handle(self, *args, **opts):
 
-        if opts['youtube_id']:
-            v = Video.objects.get(youtube_id=opts['youtube_id'])
+        if opts['video_id']:
+            v = Video.objects.get(youtube_id=opts['video_id'])
 
         elif opts['filename']:
             filename = opts['filename']

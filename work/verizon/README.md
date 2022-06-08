@@ -7,7 +7,9 @@ The directory parent to this one was initially started by the command `django-ad
 ## Example commands
 
 ```
-python manage.py label --video QJHcWIXymHA
+# Says that the following video is an example of video-of-video, and also
+# downloads a few frames of the video (if not done already):
+python manage.py label --video QJHcWIXymHA --recording vov
 ```
 
 ## Models
