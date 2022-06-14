@@ -252,7 +252,7 @@ class Command(BaseCommand):
             help='A particular video to process.')
         p.add_argument('--frame-number', dest='frame_number', type=int,
             help='The frame number to consider.')
-        p.add_argument('--output_filename', dest='output_filename', type=str,
+        p.add_argument('--output-filename', dest='output_filename', type=str,
             help='The filename to output to.')
         p.add_argument('--filename', dest='filename', type=str,
             help='The filename to consider.')
