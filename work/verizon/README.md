@@ -1,10 +1,6 @@
 # A web administration interface for video and image data curation
 
-This is all for machine learning purposes.  The most important thing is a Django management command that outputs `tfrecord` files.
-
-The entire purpose of this web-based interface is to label, or curate, video and image data.  The web interface is provided as a means to visually see and inspect what you are labeling.  Of course, in machine learning, you often deal with data, and you manually have to label that data; this interface allows you to label the data.  Behind the scenes, evenything eventually executes a [Django management command](https://docs.djangoproject.com/en/4.0/howto/custom-management-commands/).
-
-The directory parent to this one was initially started by the command `django-admin startproject verizon`, with Django version 4.0.5.
+The entire purpose of this web-based interface is to label, or curate, video and image data.  Of course, in machine learning, you often deal with data, and you manually have to label that data; this interface allows you to do that.  Behind the scenes, everything eventually executes a [Django management command](https://docs.djangoproject.com/en/4.0/howto/custom-management-commands/).
 
 ## Example commands
 
@@ -41,3 +37,7 @@ docker build
     -t verizon
     verizon/work/verizon
 ```
+
+## (extra information)
+
+The directory parent to this one was initially created by the command `django-admin startproject verizon`, with Django version 4.0.5.
