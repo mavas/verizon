@@ -12,7 +12,7 @@ python manage.py label --video QJHcWIXymHA --recording vov
 
 ## Models
 
-Here are the custom models created with his repository:
+Here are the custom models created with this repository:
 
 - Binary classification, whether or not gameplay footage is present (menu, stages, etc.)
 
