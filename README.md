@@ -22,6 +22,6 @@ Aside from the official certification though, you should have a custom project t
 
 ## Relavent knowledge and understanding
 
-- [tensorflow-without-a-phd](https://github.com/GoogleCloudPlatform/tensorflow-without-a-phd).  This repository is officially supported by TensorFlow, and is highly valuable towards understanding and practicing convolutional neural networks, dropouts, time series analysis, and the like.  So this repository is a solid point why you folks should consider my candidacy.
+- [tensorflow-without-a-phd](https://github.com/GoogleCloudPlatform/tensorflow-without-a-phd).  This repository is officially supported by TensorFlow, and is valuable towards understanding and practicing convolutional neural networks, dropouts, time series analysis, and the like.  So this repository is a solid point why you folks should consider my candidacy.
 
 - [The official certification](https//www.tensorflow.org/certificate) covers a variety of subjects, but I can tell you that they are broadly categorized into 3: convolutional neural networks (CNNs), natural language processing, and time series analysis.  The job of course looks like it doesn't have much to do with NLP, but the other 2 subjects are important/significant, and so that's good for my candidacy for this role.
