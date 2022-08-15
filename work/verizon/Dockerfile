@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:bookworm
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG DEBIAN_FRONTEND=noninteractive
