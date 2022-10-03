@@ -1,6 +1,6 @@
 # A web administration interface for video and image data curation
 
-The entire purpose of this web-based interface is to label, or curate, video and image data.  Of course, in machine learning, you often deal with data, and you manually have to label that data; this interface allows you to do that.  Behind the scenes, everything eventually executes a [Django management command](https://docs.djangoproject.com/en/4.0/howto/custom-management-commands/).
+The entire purpose of this web-based interface is to label, or curate, video and image data.  Of course, in machine learning, you often deal with data, and you manually have to label that data; this interface allows you to do that.  Behind the scenes, everything eventually executes a Django management command ([ref](https://docs.djangoproject.com/en/4.0/howto/custom-management-commands/)).
 
 ## Example commands
 
