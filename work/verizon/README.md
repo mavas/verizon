@@ -34,8 +34,7 @@ There are 4 containers: a PostgreSQL database, a Django web server, a TensorBoar
 git clone https://github.com/mavas/verizon
 docker build
     -f verizon/work/verizon/Dockerfile
-    -t verizon
-    verizon/work/verizon
+    -t verizon verizon/work/verizon
 ```
 
 ## (extra information)
