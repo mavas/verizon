@@ -39,4 +39,5 @@ docker build
 
 ## (extra information)
 
-The directory parent to this one was initially created by the command `django-admin startproject verizon`, with Django version 4.0.5.
+- The directory parent to this one was initially created by the command `django-admin startproject verizon`, with Django version 4.0.5.
+- The web pages all only use HTML5 and no JavaScript.
